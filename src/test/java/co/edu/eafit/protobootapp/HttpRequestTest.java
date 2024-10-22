@@ -10,7 +10,7 @@ import org.springframework.boot.web.server.LocalServerPort;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-// Pruebas de integración
+//Pruebas de integración
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class HttpRequestTest {
 
@@ -23,30 +23,30 @@ public class HttpRequestTest {
     @Test
     public void testSaludoPorDefecto() throws Exception {
         assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/hola",
-                String.class)).contains("Hola Mundo!!!");  // Añadido un signo de exclamación extra
+                String.class)).contains("Hola Mundo!");
     }
-
+    
     @Test
     public void testCuadradoPorDefecto() throws Exception {
         assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/cuadrado",
-                String.class)).containsPattern("El cuadrado de 0[\\.,]000000 es 1[\\.,]000000");  // Cambiado de 0 a 1
+                String.class)).containsPattern("El cuadrado de 0[\\.,]000000 es 0[\\.,]000000");
     }
-
+    
     @Test
     public void testCuboPorDefecto() throws Exception {
         assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/cubo",
-                String.class)).containsPattern("El cubo de 0[\\.,]000000 es 1[\\.,]000000");  // Cambiado de 0 a 1
+                String.class)).containsPattern("El cubo de 0[\\.,]000000 es 0[\\.,]000000");
     }
-
+    
     @Test
     public void testCuadradoNumero() throws Exception {
         assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/cuadrado?numero=3",
-                String.class)).containsPattern("El cuadrado de 3[\\.,]000000 es 10[\\.,]000000");  // Cambiado de 9 a 10
+                String.class)).containsPattern("El cuadrado de 3[\\.,]000000 es 9[\\.,]000000");
     }
-
+    
     @Test
     public void testCuboNumero() throws Exception {
         assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/cubo?numero=3",
-                String.class)).containsPattern("El cubo de 3[\\.,]000000 es 28[\\.,]000000");  // Cambiado de 27 a 28
+                String.class)).containsPattern("El cubo de 3[\\.,]000000 es 27[\\.,]000000");
     }
 }
