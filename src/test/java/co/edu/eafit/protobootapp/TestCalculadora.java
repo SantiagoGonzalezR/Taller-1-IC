@@ -45,6 +45,7 @@ public class TestCalculadora {
     }
 
     @Test
+    public void testCuboUno() {
         Calculadora calc = new Calculadora();
         assertEquals(1.0, calc.cubo(1.0), 0);
     }
