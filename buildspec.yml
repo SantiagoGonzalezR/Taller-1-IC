@@ -16,7 +16,7 @@ phases:
       - mvn compile
       - mvn test
       - mvn install
-      - dependency-check/bin/dependency-check.sh --project "ProtobootApp" --scan target/
+      - mvn verify
       # - command
 
   post_build:
@@ -34,11 +34,8 @@ reports:
     files:
       - 'target/surefire-reports/*.xml'
     file-format: 'JUNITXML'
-  cve-report:
-    files:
-      - 'dependency-check-report/dependency-check-report.xml' # or .html if preferred
-    file-format: 'XML'
 
 artifacts:
   files:
     - root.jar
+    - target/dependency-check-report/*

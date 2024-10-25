@@ -151,9 +151,9 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <format>XML</format> <!-- You can also add HTML or JSON -->
+                    <format>XML</format>
                     <outputDirectory>${project.build.directory}/dependency-check-report</outputDirectory>
-                    <failOnError>true</failOnError> <!-- Set to false if you don't want the build to fail on vulnerabilities -->
+                    <failOnError>true</failOnError>
                 </configuration>
             </plugin>
         </plugins>
