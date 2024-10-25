@@ -6,18 +6,25 @@ phases:
     #Si especifica las versiones del tiempo de ejecución y utiliza una imagen que no sea la estándar de Ubuntu 2.0, se produce un error en la compilación.
     runtime-versions:
       java: corretto17
+    commands:
+      - curl -sL https://github.com/jeremylong/DependencyCheck/releases/download/v7.0.4/dependency-check-7.0.4-release.zip -o dependency-check.zip
+      - unzip dependency-check.zip -d dependency-check
+      - export PATH=$PATH:$(pwd)/dependency-check/bin # Insercion del dependency-check al PATH
 
   build:
     commands:
       - mvn compile
       - mvn test
       - mvn install
+      - dependency-check/bin/dependency-check.sh --project "ProtobootApp" --scan target/
       # - command
+
   post_build:
     commands:
       - mvn package
       - mv target/protobootapp-0.0.1-SNAPSHOT.jar root.jar
       # - command
+
 reports:
   jacoco-report:
     files:
@@ -27,6 +34,10 @@ reports:
     files:
       - 'target/surefire-reports/*.xml'
     file-format: 'JUNITXML'
+  cve-report:
+    files:
+      - 'dependency-check-report/dependency-check-report.xml' # or .html if preferred
+    file-format: 'XML'
 
 artifacts:
   files:
