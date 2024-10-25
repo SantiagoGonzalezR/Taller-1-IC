@@ -137,6 +137,25 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+            <plugin>
+                <groupId>org.owasp</groupId>
+                <artifactId>dependency-check-maven</artifactId>
+                <version>8.3.1</version>
+                <executions>
+                    <execution>
+                        <id>check-dependencies</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <format>XML</format> <!-- You can also add HTML or JSON -->
+                    <outputDirectory>${project.build.directory}/dependency-check-report</outputDirectory>
+                    <failOnError>true</failOnError> <!-- Set to false if you don't want the build to fail on vulnerabilities -->
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 </project>
